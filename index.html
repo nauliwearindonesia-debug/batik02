@@ -7,6 +7,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/scrollreveal"></script>
   <style>
+    .stars {
+  margin-top:10px;
+}
+
+.star {
+  font-size:20px;
+  cursor:pointer;
+  color:#555;
+}
+
+.star.active {
+  color:gold;
+}
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter',sans-serif;background:#343232;color:#e7eaed;overflow-x:hidden}
 
@@ -127,6 +140,27 @@
 </footer>
 
 <script>
+  let ratings = JSON.parse(localStorage.getItem('ratings')) || {};
+
+function setRating(productIndex, value){
+  ratings[productIndex] = value;
+  localStorage.setItem('ratings', JSON.stringify(ratings));
+  updateStars(productIndex);
+}
+
+function updateStars(productIndex){
+  const stars = document.querySelectorAll(`#stars-${productIndex} .star`);
+  const rating = ratings[productIndex] || 0;
+
+  stars.forEach((star, index)=>{
+    setTimeout(()=>updateStars(i), 0);
+    if(index < rating){
+      star.classList.add('active');
+    } else {
+      star.classList.remove('active');
+    }
+  });
+}
   const products = [
     {name:'Bendo', price:50000, img:'a.jpeg'},
     {name:'Baju Anak-anak', price:350000, img:'4.jpeg'},
@@ -145,8 +179,14 @@
         <div class="product">
           <img src="${p.img}">
           <div class="product-info">
-            <h4>${p.name}</h4>
-            <div class="price">Rp ${p.price.toLocaleString()}</div>
+  <h4>${p.name}</h4>
+  <div class="price">Rp ${p.price.toLocaleString()}</div>
+
+  <div class="stars" id="stars-${i}">
+    ${[1,2,3,4,5].map(star => `
+      <span class="star" onclick="setRating(${i}, ${star})">★</span>
+    `).join('')}
+  </div>
             <div style="display:flex; gap:10px;">
   <button class="buy-btn" onclick="addToCart(${i})">+ Keranjang</button>
 
