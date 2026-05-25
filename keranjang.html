@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Keranjang Nauli Wear</title>
+
+<style>
+body {
+  font-family: Poppins, sans-serif;
+  background: #f4f4f4;
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.info {
+  flex: 1;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty button {
+  padding: 5px 10px;
+  border: none;
+  background: #25D366;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.hapus {
+  background: red;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.total-box {
+  margin-top: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.checkout {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  background: #25D366;
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+
+<h2>🛒 Keranjang Belanja</h2>
+
+<div id="cartList"></div>
+
+<div class="total-box">
+  Total: Rp <span id="totalHarga">0</span>
+</div>
+
+<button class="checkout" onclick="checkout()">Checkout</button>
+
+<script>
+let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
+
+function tampilkanKeranjang(){
+  let list = document.getElementById("cartList");
+  let total = 0;
+  list.innerHTML = "";
+
+  keranjang.forEach((item, index) => {
+    if(!item.qty) item.qty = 1;
+
+    let div = document.createElement("div");
+    div.className = "cart-item";
+
+    div.innerHTML = `
+      <div class="info">
+        <b>${item.nama}</b><br>
+        Rp ${item.harga}
+      </div>
+
+      <div class="qty">
+        <button onclick="kurang(${index})">-</button>
+        <span>${item.qty}</span>
+        <button onclick="tambah(${index})">+</button>
+      </div>
+
+      <button class="hapus" onclick="hapus(${index})">Hapus</button>
+    `;
+
+    list.appendChild(div);
+
+    total += item.harga * item.qty;
+  });
+
+  document.getElementById("totalHarga").innerText = total;
+  localStorage.setItem("keranjang", JSON.stringify(keranjang));
+}
+
+// tambah qty
+function tambah(i){
+  keranjang[i].qty++;
+  tampilkanKeranjang();
+}
+
+// kurang qty
+function kurang(i){
+  if(keranjang[i].qty > 1){
+    keranjang[i].qty--;
+  }
+  tampilkanKeranjang();
+}
+
+// hapus item
+function hapus(i){
+  keranjang.splice(i, 1);
+  tampilkanKeranjang();
+}
+
+// checkout
+function checkout(){
+  let pesan = "Halo, saya ingin pesan:%0A";
+
+  keranjang.forEach(item => {
+    pesan += `- ${item.nama} (${item.qty}x)%0A`;
+  });
+
+  window.open("https://wa.me/6281234567890?text=" + pesan);
+}
+
+// load awal
+tampilkanKeranjang();
+</script>
+
+</body>
+</html>

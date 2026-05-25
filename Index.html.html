@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nauli Wear Grup 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:#343232;color:#e7eaed;overflow-x:hidden}
+
+    header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:20px 60px;position:fixed;width:100%;z-index:1000;
+      background:rgba(68, 62, 62, 0.6);backdrop-filter:blur(10px)
+    }
+
+    header h1{font-family:'Playfair Display',serif;letter-spacing:3px}
+
+    nav a{
+      margin-left:25px;text-decoration:none;color:#ddd;
+      font-size:13px;letter-spacing:1px;transition:.10s
+    }
+    nav a:hover{color:#c9a36b}
+
+    .hero{
+      height:100vh;
+      background:url('00.png') center/cover no-repeat;
+      display:flex;align-items:center;justify-content:center;text-align:center
+    }
+
+    .hero h2{
+      font-size:60px;font-family:'Playfair Display',serif;
+      letter-spacing:2px
+    }
+
+    .hero p{margin-top:15px;color:#978787}
+
+    .btn{
+      margin-top:25px;padding:14px 35px;background:#c9a36b;
+      border:none;color:#000;font-weight:600;cursor:pointer;
+      transition:.10s
+    }
+    .btn:hover{background:#fff}
+
+    .section{padding:100px 60px}
+
+    .section h3{
+      text-align:center;margin-bottom:50px;
+      font-size:36px;font-family:'Playfair Display',serif
+    }
+
+    .products{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px
+    }
+
+    .product{
+      background:#111;border-radius:15px;overflow:hidden;
+      transition:.10s;position:relative
+    }
+
+    .product img{width:100%;height:350px;object-fit:cover}
+
+    .product-info{padding:20px}
+
+    .product:hover{transform:translateY(-10px)}
+
+    .price{color:#c9a36b;margin-top:5px}
+
+    .buy-btn{
+      margin-top:10px;padding:10px 20px;border:none;
+      background:#c9a36b;color:#000;cursor:pointer;width:100%
+    }
+
+    .about{text-align:center;max-width:800px;margin:auto;color:#ccc;line-height:1.8}
+
+    footer{
+      padding:40px;text-align:center;background:#000;color:#777
+    }
+
+    .cart{
+      position:fixed;right:20px;bottom:20px;
+      background:#c9a36b;color:#000;padding:15px 20px;
+      border-radius:50px;cursor:pointer;font-weight:bold
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>NAULI WEAR</h1>
+  <nav>
+    <a href="#">HOME</a>
+    <a href="#produk">TERBARU</a>
+    <a href="#tentang">TENTANG</a>
+    <a href="WEB1.html">SEMUA PRODUK</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h2>NAULI WEAR</h2>
+    <p>By Group 3</p>
+    <button class="btn" onclick="scrollToProduk()">EXPLORE</button>
+  </div>
+</section>
+
+<section class="section" id="produk">
+  <h3>KOLEKSI EKSKLUSIF</h3>
+  <div class="products" id="product-list"></div>
+</section>
+
+<section class="section" id="tentang">
+  <h3>TENTANG BRAND</h3>
+  <p class="about">
+    Nauli Wear Grup 3 menghadirkan fashion premium dengan sentuhan budaya Batak Toba.
+    Setiap desain menggabungkan motif tradisional dengan gaya modern untuk menciptakan
+    identitas yang elegan, kuat, dan berkelas.
+  </p>
+</section>
+
+<div class="cart" onclick="goToCheckout()">🛒 Keranjang (<span id="cart-count">0</span>)</div>
+
+<footer>
+  <p>© 2026 Nauli Wear Grup 3</p>
+</footer>
+
+<script>
+  const products = [
+    {name:'Bendo', price:50000, img:'a.jpeg'},
+    {name:'Baju Anak-anak', price:350000, img:'4.jpeg'},
+    {name:'Tote Bag', price:500000, img:'5.jpeg'},
+    {name:'Koleksi Lainnya', price:4000000, img:'7.jpeg'}
+  ];
+
+  let cart = [];
+
+  function renderProducts(){
+    const container = document.getElementById('product-list');
+    container.innerHTML='';
+
+    products.forEach((p,i)=>{
+      container.innerHTML += `
+        <div class="product">
+          <img src="${p.img}">
+          <div class="product-info">
+            <h4>${p.name}</h4>
+            <div class="price">Rp ${p.price.toLocaleString()}</div>
+            <div style="display:flex; gap:10px;">
+  <button class="buy-btn" onclick="addToCart(${i})">+ Keranjang</button>
+
+  <a href="Pembayaran.html?produk=${p.name}&harga=${p.price}" style="width:100%;">
+    <button class="buy-btn">Beli</button>
+  </a>
+</div>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+ function addToCart(i){
+  const item = products[i];
+
+  const existing = cart.find(c => c.name === item.name);
+
+  if(existing){
+    existing.qty++;
+  } else {
+    cart.push({...item, qty:1});
+  }
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  document.getElementById('cart-count').innerText = cart.length;
+}
+
+  function viewCart()
+  {
+    let message = 'Pesanan Anda:\n';
+    cart.forEach((item, i)=>{
+      message += `${i+1}. ${item.name} - Rp ${item.price}\n`;
+    });
+    alert(message);
+  }
+function goToCheckout(){
+
+  if(cart.length === 0){
+    alert("Keranjang masih kosong!");
+    return;
+  }
+
+  let produk = '';
+  let total = 0;
+
+  cart.forEach(item => {
+    produk += `${item.name} x${item.qty}, `;
+    total += item.price * item.qty;
+  });
+
+  // simpan ke localStorage
+  localStorage.setItem('checkoutProduk', produk);
+  localStorage.setItem('checkoutTotal', total);
+
+  // pindah halaman
+  window.location.href = "Pembayaran.html";
+}
+  function scrollToProduk(){
+    document.getElementById('produk').scrollIntoView({behavior:'smooth'});
+  }
+
+  renderProducts();
+
+  ScrollReveal().reveal('.product',{delay:200,interval:200});
+</script>
+
+</body>
+</html>
