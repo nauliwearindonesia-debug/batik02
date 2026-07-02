@@ -1,273 +1,109 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nauli Wear</title>
+<!-- STRUK THERMAL -->
+<div id="struk" style="display:none; text-align:center; margin-top:30px;">
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+    <div id="printArea" style="
+        width:300px;
+        background:white;
+        color:black;
+        padding:15px;
+        font-family:'Courier New', monospace;
+        font-size:12px;
+        margin:auto;
+        border:1px dashed #999;
+        border-radius:5px;
+    ">
 
-body {
-  background: #f4f4f4;
-}
+        <div id="isiStruk"></div>
 
-/* NAVBAR */
-nav {
-  background: #b4aeae;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-}
-
-nav h2 {
-  color: white;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-}
-
-nav ul li a:hover {
-  background: #25D366;
-}
-
-nav input {
-  padding: 8px 12px;
-  border-radius: 20px;
-  border: none;
-}
-
-/* HERO */
-.hero {
-  height: 80vh;
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('p1.jpeg');
-  background-size: cover;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 50px;
-}
-
-/* PRODUK */
-.container {
-  padding: 40px;
-  background: #4d2525;
-  border-radius: 15px;
-  margin: 20px;
-}
-
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
-}
-
-.card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.card-body {
-  padding: 15px;
-  text-align: center;
-}
-
-.price {
-  color: green;
-  font-weight: bold;
-}
-
-/* tombol */
-.btn {
-  background: #25D366;
-  color: white;
-  border: none;
-  padding: 10px;
-  width: 100%;
-  border-radius: 5px;
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-.detail-btn {
-  background: #eee;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-left: 5px;
-}
-
-.price-detail {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-/* MODAL */
-#modal {
-  display: none;
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-box {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: 300px;
-  text-align: center;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #111;
-  color: white;
-}
-</style>
-
-</head>
-<body>
-
-<!-- NAVBAR -->
-<nav>
-  <h2>Nauli Wear</h2>
-
-  <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#produk">Produk</a></li>
-  </ul>
-
-  <input type="text" id="searchInput" placeholder="Cari produk..." onkeyup="cariProduk()">
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <h1>Style Keren, Harga Santai</h1>
-  <button onclick="scrollProduk()">Belanja</button>
-</section>
-
-<!-- PRODUK -->
-<div class="container" id="produk">
-  <h2 style="color:white;">Semua Produk</h2><br>
-
-  <div class="products">
-
-    <div class="card">
-      <img src="p7.jpeg">
-      <div class="card-body">
-        <h3>Saku Jas</h3>
-        <div class="price-detail">
-          <span class="price">Rp 30.000</span>
-          <button class="detail-btn" onclick="detailProduk('Saku Jas','Aksesoris jas elegan')">👁</button>
-        </div>
-        <button class="btn" onclick="beli('Saku Jas')">Beli</button>
-      </div>
     </div>
 
-    <div class="card">
-      <img src="p4.jpeg">
-      <div class="card-body">
-        <h3>Pouch</h3>
-        <div class="price-detail">
-          <span class="price">Rp 80.000</span>
-          <button class="detail-btn" onclick="detailProduk('Pouch','Tas kecil serbaguna')">👁</button>
-        </div>
-        <button class="btn" onclick="beli('Pouch')">Beli</button>
-      </div>
-    </div>
+    <!-- Tombol Cetak -->
+    <button onclick="printStruk()" style="
+        margin-top:20px;
+        width:300px;
+        padding:12px;
+        background:black;
+        color:white;
+        border:none;
+        cursor:pointer;
+        border-radius:8px;
+    ">
+        🖨 Cetak Struk
+    </button>
 
-  </div>
+    <!-- Tombol Selesai -->
+    <button onclick="selesai()" style="
+        margin-top:10px;
+        width:300px;
+        padding:12px;
+        background:#28a745;
+        color:white;
+        border:none;
+        cursor:pointer;
+        border-radius:8px;
+    ">
+        ✅ Selesai
+    </button>
+
+    <!-- Tombol Kembali -->
+    <button onclick="kembaliHome()" style="
+        margin-top:10px;
+        width:300px;
+        padding:12px;
+        background:#0d6efd;
+        color:white;
+        border:none;
+        cursor:pointer;
+        border-radius:8px;
+    ">
+        🏠 Kembali ke Home
+    </button>
+
 </div>
-
-<!-- MODAL -->
-<div id="modal">
-  <div class="modal-box">
-    <h3 id="judulProduk"></h3>
-    <p id="deskripsiProduk"></p><br>
-    <button onclick="tutupModal()">Tutup</button>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 Nauli Wear</p>
-</footer>
-
 <script>
-function beli(namaProduk){
-  let nomor = "6281234567890";
-  let pesan = `Halo, saya ingin membeli ${namaProduk}`;
-  let url = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
-  window.open(url, "_blank");
+
+// ======================
+// API WILAYAH
+// ======================
+
+loadProvinsi();
+
+
+// ======================
+// FUNGSI SELESAI
+// ======================
+
+function selesai(){
+
+    alert("Terima kasih telah berbelanja di Nauli Wear.");
+
+    // Menghapus data checkout
+    localStorage.removeItem("checkout");
+
+    // Menyembunyikan struk
+    document.getElementById("struk").style.display = "none";
+
 }
 
-function scrollProduk(){
-  document.getElementById("produk").scrollIntoView({behavior:"smooth"});
+function kembaliHome(){
+
+    // Hapus data checkout
+    localStorage.removeItem("checkout");
+
+    // Kembali ke halaman utama
+    window.location.href = "index.html";
+
 }
 
-function detailProduk(nama, deskripsi){
-  document.getElementById("judulProduk").innerText = nama;
-  document.getElementById("deskripsiProduk").innerText = deskripsi;
-  document.getElementById("modal").style.display = "flex";
-}
-
-function tutupModal(){
-  document.getElementById("modal").style.display = "none";
-}
-
-function cariProduk(){
-  let input = document.getElementById("searchInput").value.toLowerCase();
-  let cards = document.querySelectorAll(".card");
-
-  cards.forEach(card => {
-    let nama = card.querySelector("h3").innerText.toLowerCase();
-
-    if(input === "" || nama.includes(input)){
-      card.style.display = "";
-    } else {
-      card.style.display = "none";
-    }
-  });
-}
 </script>
+<button onclick="printStruk()">
+    🖨 Cetak Struk
+</button>
 
-</body>
-</html>
+<button onclick="selesai()">
+    ✅ Selesai
+</button>
+
+<button onclick="kembaliHome()">
+    🏠 Kembali ke Home
+</button>

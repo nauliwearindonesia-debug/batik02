@@ -1,497 +1,626 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!DOCTYPE html>
+  <html lang="id">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Checkout Nauli Wear</title>
+  <title>Checkout Nauli Wear</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-<style>
+  <style>
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
 
-body{
-  font-family:'Inter',sans-serif;
-  background:#1e1e1e;
-  color:white;
-}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:40px 20px;
-
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:30px;
-}
-
-.card{
-  background:#111;
-  padding:30px;
-  border-radius:20px;
-}
-
-h2{
-  font-family:'Playfair Display';
-  margin-bottom:20px;
-}
-
-.input-group{
-  margin-bottom:20px;
-}
-
-.input-group label{
-  display:block;
-  margin-bottom:8px;
-  color:#ccc;
-}
-
-.input-group input,
-.input-group select,
-.input-group textarea{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:10px;
-  background:#222;
-  color:white;
-}
-
-textarea{
-  resize:none;
-  height:100px;
-}
-
-.summary-item{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:15px;
-  padding-bottom:10px;
-  border-bottom:1px solid #333;
-}
-
-.total{
-  font-size:22px;
-  color:#c9a36b;
-  margin-top:20px;
-}
-
-.checkout-btn{
-  width:100%;
-  padding:16px;
-  margin-top:20px;
-  border:none;
-  background:#c9a36b;
-  color:black;
-  font-weight:bold;
-  cursor:pointer;
-  border-radius:10px;
-  font-size:16px;
-}
-
-.checkout-btn:hover{
-  background:white;
-}
-
-.back{
-  display:inline-block;
-  margin-bottom:20px;
-  color:#c9a36b;
-  text-decoration:none;
-}
-
-@media(max-width:900px){
+  body{
+    font-family:'Inter',sans-serif;
+    background:#1e1e1e;
+    color:white;
+  }
 
   .container{
-    grid-template-columns:1fr;
+    max-width:1200px;
+    margin:auto;
+    padding:40px 20px;
+
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
   }
 
-}
+  .card{
+    background:#111;
+    padding:30px;
+    border-radius:20px;
+  }
 
-</style>
-</head>
-<body>
+  h2{
+    font-family:'Playfair Display';
+    margin-bottom:20px;
+  }
 
-<div class="container">
+  .input-group{
+    margin-bottom:20px;
+  }
 
-  <!-- FORM -->
-  <div class="card">
+  .input-group label{
+    display:block;
+    margin-bottom:8px;
+    color:#ccc;
+  }
 
-    <a href="index.html" class="back">← Kembali Belanja</a>
+  .input-group input,
+  .input-group select,
+  .input-group textarea{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#222;
+    color:white;
+  }
 
-    <h2>Checkout</h2>
+  textarea{
+    resize:none;
+    height:100px;
+  }
 
-    <div class="input-group">
-      <label>Nama Lengkap</label>
-      <input type="text" id="nama">
-    </div>
+  .summary-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+    padding-bottom:10px;
+    border-bottom:1px solid #333;
+  }
 
-    <div class="input-group">
-      <label>Nomor WhatsApp</label>
-      <input type="text" id="wa">
-    </div>
+  .total{
+    font-size:22px;
+    color:#c9a36b;
+    margin-top:20px;
+  }
 
-    <div class="input-group">
-      <label>Email</label>
-      <input type="email" id="email">
-    </div>
+  .checkout-btn{
+    width:100%;
+    padding:16px;
+    margin-top:20px;
+    border:none;
+    background:#c9a36b;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    border-radius:10px;
+    font-size:16px;
+  }
 
-    <div class="input-group">
-      <label>Provinsi</label>
-      <select id="provinsi"></select>
-    </div>
+  .checkout-btn:hover{
+    background:white;
+  }
 
-    <div class="input-group">
-      <label>Kota / Kabupaten</label>
-      <select id="kota"></select>
-    </div>
+  .back{
+    display:inline-block;
+    margin-bottom:20px;
+    color:#c9a36b;
+    text-decoration:none;
+  }
 
-    <div class="input-group">
-      <label>Kecamatan</label>
-      <select id="kecamatan"></select>
-    </div>
+  @media(max-width:900px){
 
-    <div class="input-group">
-      <label>Alamat Lengkap</label>
-      <textarea id="alamat"></textarea>
-    </div>
+    .container{
+      grid-template-columns:1fr;
+    }
 
-    <div class="input-group">
-      <label>Ekspedisi</label>
-      <select id="ekspedisi">
-        <option>JNE</option>
-        <option>J&T</option>
-        <option>SiCepat</option>
-        <option>Gojek</option>
-      </select>
-    </div>
+  }
 
-    <div class="input-group">
-      <label>Metode Pembayaran</label>
-      <select id="bayar" onchange="showPayment()">
-        <option>Transfer Bank</option>
-        <option>DANA</option>
-        <option>OVO</option>
-        <option>QRIS</option>
-        <option>COD</option>
-      </select>
-    </div>
-    <div id="paymentInfo" style="
-  margin-top:20px;
-  background:#222;
-  padding:20px;
-  border-radius:12px;
-  display:none;
+  </style>
+  </head>
+  <body>
+
+  <div class="container">
+
+    <!-- FORM -->
+    <div class="card">
+
+      <a href="index.html" class="back">← Kembali Belanja</a>
+
+      <h2>Checkout</h2>
+
+      <div class="input-group">
+        <label>Nama Lengkap</label>
+        <input type="text" id="nama">
+      </div>
+
+      <div class="input-group">
+        <label>Nomor WhatsApp</label>
+        <input type="text" id="wa">
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="email">
+      </div>
+
+      <div class="input-group">
+        <label>Provinsi</label>
+        <select id="provinsi"></select>
+      </div>
+
+      <div class="input-group">
+        <label>Kota / Kabupaten</label>
+        <select id="kota"></select>
+      </div>
+
+      <div class="input-group">
+        <label>Kecamatan</label>
+        <select id="kecamatan"></select>
+      </div>
+
+      <div class="input-group">
+        <label>Alamat Lengkap</label>
+        <textarea id="alamat"></textarea>
+      </div>
+
+      <div class="input-group">
+        <label>Ekspedisi</label>
+        <select id="ekspedisi">
+          <option>JNE</option>
+          <option>J&T</option>
+          <option>SiCepat</option>
+          <option>Gojek</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Metode Pembayaran</label>
+        <select id="bayar" onchange="showPayment()">
+          <option>Transfer Bank</option>
+          <option>DANA</option>
+          <option>OVO</option>
+          <option>QRIS</option>
+          <option>COD</option>
+        </select>
+      </div>
+      <div id="paymentInfo" style="
+    margin-top:20px;
+    background:#222;
+    padding:20px;
+    border-radius:12px;
+    display:none;
+  ">
+
+    <h3 style="margin-bottom:15px;">
+      Informasi Pembayaran
+    </h3>
+
+    <div id="paymentDetail"></div>
+
+  </div>
+
+  <div class="input-group">
+
+    <label>Upload Bukti Pembayaran</label>
+    <p style="color:#aaa;font-size:13px;margin-top:8px;">
+  Setelah WhatsApp terbuka, kirim juga foto bukti pembayaran.
+  </p>
+
+    <input
+      type="file"
+      id="bukti"
+      accept="image/*"
+      style="
+        background:#222;
+        padding:10px;
+        border-radius:10px;
+      "
+    >
+
+  </div>
+
+      <button class="checkout-btn" onclick="checkout()">
+
+🧾 Cetak Struk
+</button>
+      
+<!-- PANDUAN UKURAN -->
+
+<div style="
+
+margin-top:25px;
+
+background:#222;
+
+padding:20px;
+
+border-radius:15px;
+
 ">
 
-  <h3 style="margin-bottom:15px;">
-    Informasi Pembayaran
-  </h3>
+<h3 style="margin-bottom:15px;color:#c9a36b;">
 
-  <div id="paymentDetail"></div>
+📏 Panduan Ukuran Pakaian
 
-</div>
+</h3>
 
-<div class="input-group">
+<table style="width:100%;color:white;border-collapse:collapse;">
 
-  <label>Upload Bukti Pembayaran</label>
-  <p style="color:#aaa;font-size:13px;margin-top:8px;">
-Setelah WhatsApp terbuka, kirim juga foto bukti pembayaran.
+<tr style="border-bottom:1px solid #444;">
+
+<th align="left">Ukuran</th>
+
+<th align="left">Lebar Dada</th>
+
+<th align="left">Panjang</th>
+
+</tr>
+
+<tr><td>S</td><td>48 cm</td><td>68 cm</td></tr>
+
+<tr><td>M</td><td>50 cm</td><td>70 cm</td></tr>
+
+<tr><td>L</td><td>52 cm</td><td>72 cm</td></tr>
+
+<tr><td>XL</td><td>54 cm</td><td>74 cm</td></tr>
+
+<tr><td>XXL</td><td>56 cm</td><td>76 cm</td></tr>
+
+</table>
+
+<p style="margin-top:10px;font-size:13px;color:#aaa;">
+
+💡 Toleransi ukuran ±1-2 cm.
+
 </p>
 
-  <input
-    type="file"
-    id="bukti"
-    accept="image/*"
-    style="
-      background:#222;
-      padding:10px;
-      border-radius:10px;
-    "
-  >
-
 </div>
-
-    <button class="checkout-btn" onclick="checkoutWA ()">
-      Checkout Sekarang
-    </button>
-    
-
-  </div>
-
-  <!-- RINGKASAN -->
-  <div class="card">
-
-    <h2>Ringkasan Pesanan</h2>
-
-    <div id="summary"></div>
-
-    <div class="total" id="total">
-      Total: Rp 0
     </div>
 
-  </div>
+    <!-- RINGKASAN -->
+    <div class="card">
 
-</div>
-<script>
+      <h2>Ringkasan Pesanan</h2>
 
-// ======================
-// CART
-// ======================
+      <div id="summary"></div>
 
-const cart =
-JSON.parse(localStorage.getItem('checkout')) || [];
-
-const summary =
-document.getElementById('summary');
-
-let total = 0;
-
-summary.innerHTML = "";
-
-cart.forEach((item,index)=>{
-
-  const subtotal =
-  item.harga * item.qty;
-
-  total += subtotal;
-
-  summary.innerHTML += `
-
-    <div class="summary-item">
-
-      <div>
-        <b>${item.nama}</b><br>
-        ${item.qty} x
-        Rp ${item.harga.toLocaleString()}
-      </div>
-
-      <div style="text-align:right;">
-        Rp ${subtotal.toLocaleString()}
+      <div class="total" id="total">
+        Total: Rp 0
       </div>
 
     </div>
 
-  `;
+  </div>
+  <script>
+  function buatStruk(nama, wa, alamat, bayar){
 
-});
+      const isi = document.getElementById("isiStruk");
 
-document.getElementById('total')
-.innerText =
-'Total: Rp ' + total.toLocaleString();
+      let now = new Date();
 
+      let html = `
+      <center>
+          <h2>NAULI WEAR</h2>
+          Medan
+          <br>
+          ==========================
+      </center>
 
-// ======================
-// PAYMENT
-// ======================
+      <br>
 
-function showPayment(){
+      Tanggal : ${now.toLocaleString()}<br>
+      Nama : ${nama}<br>
+      WA : ${wa}<br>
+      Alamat : ${alamat}<br>
 
-  const bayar =
-  document.getElementById("bayar").value;
+      <hr>
+      `;
 
-  const paymentInfo =
-  document.getElementById("paymentInfo");
+      cart.forEach(item=>{
 
-  paymentInfo.style.display = "block";
+          let subtotal = item.harga * item.qty;
 
-  let rekening = "";
+          html += `
+          ${item.nama}<br>
+          ${item.qty} x Rp ${item.harga.toLocaleString()}
+          <span style="float:right">
+              Rp ${subtotal.toLocaleString()}
+          </span>
+          <br><br>
+          `;
 
-  if(bayar === "DANA"){
+      });
 
-    rekening = `
-      <h3>DANA</h3>
-      <p>081234567890</p>
-      <p>a/n Nauli Wear</p>
-    `;
+      html += `
+      <hr>
 
-  }
-
-  else if(bayar === "OVO"){
-
-    rekening = `
-      <h3>OVO</h3>
-      <p>081234567890</p>
-      <p>a/n Nauli Wear</p>
-    `;
-
-  }
-
-  else if(bayar === "Transfer Bank"){
-
-    rekening = `
-      <h3>BCA</h3>
-      <p>1234567890</p>
-      <p>a/n Nauli Wear</p>
-    `;
-
-  }
-
-  else if(bayar === "QRIS"){
-
-    rekening = `
-      <h3>QRIS</h3>
-      <img src="qris.png" width="200">
-    `;
-
-  }
-
-  else{
-
-    rekening = `
-      <h3>COD</h3>
-      <p>Bayar di tempat</p>
-    `;
-
-  }
-
-  paymentInfo.innerHTML = `
-
-    ${rekening}
-
-    <hr style="margin:15px 0;border-color:#333;">
-
-    <h3>Total Tagihan</h3>
-
-    <p style="
-      font-size:22px;
-      color:#c9a36b;
-      font-weight:bold;
-      margin-top:10px;
-    ">
+      <b>
+      Total
+      <span style="float:right">
       Rp ${total.toLocaleString()}
-    </p>
+      </span>
+      </b>
 
-  `;
+      <br><br>
 
-}
+      Pembayaran : ${bayar}
 
+      <hr>
 
-// ======================
-// CHECKOUT WA
-// ======================
+      <center>
+      Terima kasih telah berbelanja
+      <br>
+      Nauli Wear
+      </center>
+      `;
 
-function checkoutWA(){
+      isi.innerHTML = html;
 
-  const nama =
-  document.getElementById('nama').value;
+      document.getElementById("struk").style.display="block";
+  }
+  function printStruk(){
 
-  const wa =
-  document.getElementById('wa').value;
+    const content = document.getElementById("printArea").innerHTML;
 
-  const alamat =
-  document.getElementById('alamat').value;
+    const win = window.open('', '', 'width=300,height=600');
 
-  const bayar =
-  document.getElementById('bayar').value;
+    win.document.write(`
+      <html>
+      <head>
+        <title>Print</title>
+        <style>
+          body{
+            font-family: 'Courier New', monospace;
+            font-size:12px;
+            width:300px;
+          }
+        </style>
+      </head>
+      <body onload="window.print();window.close()">
+        ${content}
+      </body>
+      </html>
+    `);
 
-  if(nama === "" || wa === "" || alamat === ""){
-
-    alert("Lengkapi data dulu");
-
-    return;
-
+    win.document.close();
   }
 
-  let text =
-  `Halo Nauli Wear%0A%0A`;
+  // ======================
+  // CART
+  // ======================
 
-  text += `Nama: ${nama}%0A`;
-  text += `No WA: ${wa}%0A`;
-  text += `Alamat: ${alamat}%0A`;
-  text += `Pembayaran: ${bayar}%0A%0A`;
+  const cart =
+  JSON.parse(localStorage.getItem('checkout')) || [];
 
-  text += `Pesanan:%0A`;
+  const summary =
+  document.getElementById('summary');
 
-  cart.forEach(item=>{
+  let total = 0;
+const ongkir = 15000;
+  summary.innerHTML = "";
 
-    text +=
-    `- ${item.nama} x${item.qty}%0A`;
+  cart.forEach((item,index)=>{
 
-  });
+    const subtotal =
+    item.harga * item.qty;
 
-  text +=
-  `%0ATotal: Rp ${total.toLocaleString()}`;
+    total += subtotal;
 
-  window.open(
-    `https://wa.me/6289531416689?text=${text}`
-  );
+    summary.innerHTML += `
 
-}
+      <div class="summary-item">
 
+        <div>
+          <b>${item.nama}</b><br>
+          ${item.qty} x
+          Rp ${item.harga.toLocaleString()}
+        </div>
 
-// ======================
-// API WILAYAH
-// ======================
+        <div style="text-align:right;">
+          Rp ${subtotal.toLocaleString()}
+        </div>
 
-const provinsi =
-document.getElementById("provinsi");
+      </div>
 
-const kota =
-document.getElementById("kota");
-
-const kecamatan =
-document.getElementById("kecamatan");
-
-
-// LOAD PROVINSI
-
-async function loadProvinsi(){
-
-  const response =
-  await fetch(
-    "https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
-  );
-
-  const data =
-  await response.json();
-
-  provinsi.innerHTML =
-  `<option value="">Pilih Provinsi</option>`;
-
-  data.forEach(item=>{
-
-    provinsi.innerHTML += `
-      <option value="${item.id}">
-        ${item.name}
-      </option>
     `;
 
   });
 
+  const grandTotal = total + ongkir;
+
+summary.innerHTML += `
+<div class="summary-item">
+    <div><b>Ongkos Kirim</b></div>
+    <div>Rp ${ongkir.toLocaleString()}</div>
+</div>
+`;
+
+document.getElementById("total").innerHTML =
+`
+Total : <b>Rp ${grandTotal.toLocaleString()}</b>
+`;
+
+
+  // ======================
+  // PAYMENT
+  // ======================
+
+  function showPayment(){
+
+    const bayar =
+    document.getElementById("bayar").value;
+
+    const paymentInfo =
+    document.getElementById("paymentInfo");
+
+    paymentInfo.style.display = "block";
+
+    let rekening = "";
+
+    if(bayar === "DANA"){
+
+      rekening = `
+        <h3>DANA</h3>
+        <p>081234567890</p>
+        <p>a/n Nauli Wear</p>
+      `;
+
+    }
+
+    else if(bayar === "OVO"){
+
+      rekening = `
+        <h3>OVO</h3>
+        <p>081234567890</p>
+        <p>a/n Nauli Wear</p>
+      `;
+
+    }
+
+    else if(bayar === "Transfer Bank"){
+
+      rekening = `
+        <h3>BCA</h3>
+        <p>1234567890</p>
+        <p>a/n Nauli Wear</p>
+      `;
+
+    }
+
+    else if(bayar === "QRIS"){
+
+      rekening = `
+        <h3>QRIS</h3>
+        <img src="qris.jpeg" width="200">
+      `;
+
+    }
+
+    else{
+
+      rekening = `
+        <h3>COD</h3>
+        <p>Bayar di tempat</p>
+      `;
+
+    }
+
+    paymentInfo.innerHTML = `
+
+      ${rekening}
+
+      <hr style="margin:15px 0;border-color:#333;">
+
+      <h3>Total Tagihan</h3>
+
+      <p style="
+        font-size:22px;
+        color:#c9a36b;
+        font-weight:bold;
+        margin-top:10px;
+      ">
+     Rp ${(total + ongkir).toLocaleString()}
+      </p>
+
+    `;
+
+  }
+
+
+  // ======================
+  // CHECKOUT WA
+  // ======================
+
+  function checkout(){
+
+    const nama = document.getElementById("nama").value;
+    const wa = document.getElementById("wa").value;
+    const email = document.getElementById("email").value;
+    const provinsi = document.getElementById("provinsi");
+    const kota = document.getElementById("kota");
+    const kecamatan = document.getElementById("kecamatan");
+
+    const alamat = document.getElementById("alamat").value;
+    const ekspedisi = document.getElementById("ekspedisi").value;
+    const bayar = document.getElementById("bayar").value;
+
+    if(nama=="" || wa=="" || alamat==""){
+        alert("Lengkapi data terlebih dahulu.");
+        return;
+    }
+
+const invoice = {
+
+    invoice:"INV-"+Date.now(),
+
+    tanggal:new Date().toLocaleString(),
+
+    nama:nama,
+
+    wa:wa,
+
+    email:email,
+
+    provinsi:provinsi.options[provinsi.selectedIndex].text,
+
+    kota:kota.options[kota.selectedIndex].text,
+
+    kecamatan:kecamatan.options[kecamatan.selectedIndex].text,
+
+    alamat:alamat,
+
+    ekspedisi:ekspedisi,
+
+    bayar:bayar,
+
+    cart:cart,
+
+    ongkir:ongkir,
+
+    total:grandTotal
+
+};
+
+    localStorage.setItem(
+        "invoice",
+        JSON.stringify(invoice)
+    );
+
+    window.location.href="struk.html";
+
 }
+  // ======================
+  // API WILAYAH
+  // ======================
+
+  const provinsi =
+  document.getElementById("provinsi");
+
+  const kota =
+  document.getElementById("kota");
+
+  const kecamatan =
+  document.getElementById("kecamatan");
 
 
-// LOAD KOTA
+  // LOAD PROVINSI
 
-provinsi.addEventListener(
-  "change",
-  async function(){
+  async function loadProvinsi(){
 
     const response =
     await fetch(
-      `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${this.value}.json`
+      "https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
     );
 
     const data =
     await response.json();
 
-    kota.innerHTML =
-    `<option value="">Pilih Kota</option>`;
-
-    kecamatan.innerHTML =
-    `<option value="">Pilih Kecamatan</option>`;
+    provinsi.innerHTML =
+    `<option value="">Pilih Provinsi</option>`;
 
     data.forEach(item=>{
 
-      kota.innerHTML += `
+      provinsi.innerHTML += `
         <option value="${item.id}">
           ${item.name}
         </option>
@@ -500,45 +629,106 @@ provinsi.addEventListener(
     });
 
   }
-);
 
 
-// LOAD KECAMATAN
+  // LOAD KOTA
 
-kota.addEventListener(
-  "change",
-  async function(){
+  provinsi.addEventListener(
+    "change",
+    async function(){
 
-    const response =
-    await fetch(
-      `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${this.value}.json`
-    );
+      const response =
+      await fetch(
+        `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${this.value}.json`
+      );
 
-    const data =
-    await response.json();
+      const data =
+      await response.json();
 
-    kecamatan.innerHTML =
-    `<option value="">Pilih Kecamatan</option>`;
+      kota.innerHTML =
+      `<option value="">Pilih Kota</option>`;
 
-    data.forEach(item=>{
+      kecamatan.innerHTML =
+      `<option value="">Pilih Kecamatan</option>`;
 
-      kecamatan.innerHTML += `
-        <option>
-          ${item.name}
-        </option>
-      `;
+      data.forEach(item=>{
 
-    });
+        kota.innerHTML += `
+          <option value="${item.id}">
+            ${item.name}
+          </option>
+        `;
 
-  }
-);
+      });
+
+    }
+  );
 
 
-// JALANKAN
+  // LOAD KECAMATAN
 
-loadProvinsi();
+  kota.addEventListener(
+    "change",
+    async function(){
 
-</script>
+      const response =
+      await fetch(
+        `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${this.value}.json`
+      );
 
-</body>
-</html>
+      const data =
+      await response.json();
+
+      kecamatan.innerHTML =
+      `<option value="">Pilih Kecamatan</option>`;
+
+      data.forEach(item=>{
+
+        kecamatan.innerHTML += `
+          <option>
+            ${item.name}
+          </option>
+        `;
+
+      });
+
+    }
+  );
+
+
+  // JALANKAN
+
+  loadProvinsi();
+
+  </script>
+  <!-- STRUK -->
+  <button onclick="kirimWA()" style="
+  margin-top:10px;
+  padding:10px;
+  width:100%;
+  background:green;
+  color:white;
+  border:none;
+  cursor:pointer;
+  ">
+<button onclick="printStruk()" style="
+
+margin-top:15px;
+
+padding:12px 20px;
+
+background:#c9a36b;
+
+border:none;
+
+border-radius:10px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+">
+
+🖨 Cetak Struk
+
+</button>

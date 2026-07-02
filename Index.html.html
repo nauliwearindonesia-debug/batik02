@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nauli Wear Grup 3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <style>
+    .stars {
+  margin-top:10px;
+}
+.star{
+
+font-size:40px;
+cursor:pointer;
+color:#bdbdbd;
+transition:.2s;
+
+}
+
+.star.active{
+
+color:#FFD700;
+transform:scale(1.2);
+
+}
+
+.star:hover{
+
+transform:scale(1.2);
+
+}
+.star {
+  font-size:20px;
+  cursor:pointer;
+  color:#555;
+}
+
+.star.active {
+  color:gold;
+}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:#343232;color:#e7eaed;overflow-x:hidden}
+
+    header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:20px 60px;position:fixed;width:100%;z-index:1000;
+      background:rgba(68, 62, 62, 0.6);backdrop-filter:blur(10px)
+    }
+
+    header h1{font-family:'Playfair Display',serif;letter-spacing:3px}
+
+    nav a{
+      margin-left:25px;text-decoration:none;color:#ddd;
+      font-size:13px;letter-spacing:1px;transition:.10s
+    }
+    nav a:hover{color:#c9a36b}
+
+    .hero{
+      height:100vh;
+      background:url('00.png') center/cover no-repeat;
+      display:flex;align-items:center;justify-content:center;text-align:center
+    }
+
+    .hero h2{
+      font-size:60px;font-family:'Playfair Display',serif;
+      letter-spacing:2px
+    }
+
+    .hero p{margin-top:15px;color:#978787}
+
+    .btn{
+      margin-top:25px;padding:14px 35px;background:#c9a36b;
+      border:none;color:#000;font-weight:600;cursor:pointer;
+      transition:.10s
+    }
+    .btn:hover{background:#fff}
+
+    .section{padding:100px 60px}
+
+    .section h3{
+      text-align:center;margin-bottom:50px;
+      font-size:36px;font-family:'Playfair Display',serif
+    }
+
+    .products{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px
+    }
+
+    .product{
+      background:#111;border-radius:15px;overflow:hidden;
+      transition:.10s;position:relative
+    }
+
+    .product img{width:100%;height:350px;object-fit:cover}
+
+    .product-info{padding:20px}
+
+    .product:hover{transform:translateY(-10px)}
+
+    .price{color:#c9a36b;margin-top:5px}
+
+    .buy-btn{
+      margin-top:10px;padding:10px 20px;border:none;
+      background:#c9a36b;color:#000;cursor:pointer;width:100%
+    }
+
+    .about{text-align:center;max-width:800px;margin:auto;color:#ccc;line-height:1.8}
+
+    footer{
+      padding:40px;text-align:center;background:#000;color:#777
+    }
+
+    .cart{
+      position:fixed;right:20px;bottom:20px;
+      background:#c9a36b;color:#000;padding:15px 20px;
+      border-radius:50px;cursor:pointer;font-weight:bold
+    }
+    #ratingPopup{
+
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+justify-content:center;
+align-items:center;
+z-index:9999;
+
+}
+.rating{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:10px 0;
+}
+
+.rating i{
+    color:#FFD700;
+    font-size:18px;
+}
+
+.rating span{
+    color:#ccc;
+    font-size:14px;
+}
+
+.rating-box{
+
+background:white;
+width:400px;
+max-width:90%;
+padding:30px;
+border-radius:15px;
+text-align:center;
+
+}
+
+.stars{
+
+font-size:35px;
+margin:20px 0;
+
+}
+
+.stars span{
+
+cursor:pointer;
+
+}
+
+textarea{
+
+width:100%;
+height:100px;
+padding:10px;
+margin-top:15px;
+
+}
+
+.rating-box button{
+
+margin-top:15px;
+padding:12px;
+width:100%;
+background:#c9a36b;
+border:none;
+border-radius:10px;
+cursor:pointer;
+
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>NAULI WEAR</h1>
+  <nav>
+    <a href="#">HOME</a>
+    <a href="#produk">TERBARU</a>
+    <a href="#tentang">TENTANG</a>
+    <a href="WEB1.html">SEMUA PRODUK</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <h2>NAULI WEAR</h2>
+    <p>By Group 3</p>
+    <button class="btn" onclick="scrollToProduk()">EXPLORE</button>
+  </div>
+</section>
+
+<section class="section" id="produk">
+  <h3>KOLEKSI EKSKLUSIF</h3>
+  <div class="products" id="product-list"></div>
+</section>
+
+<section class="section" id="tentang">
+  <h3>TENTANG BRAND</h3>
+  <p class="about">
+    Nauli Wear Grup 3 menghadirkan fashion premium dengan sentuhan budaya Batak Toba.
+    Setiap desain menggabungkan motif tradisional dengan gaya modern untuk menciptakan
+    identitas yang elegan, kuat, dan berkelas.
+  </p>
+</section>
+
+<div class="cart" onclick="goToCheckout()">🛒 Keranjang (<span id="cart-count">0</span>)</div>
+
+<footer>
+  <p>© 2026 Nauli Wear Grup 3</p>
+</footer>
+
+<script>
+  let ratings = JSON.parse(localStorage.getItem('ratings')) || {};
+
+function setRating(productIndex, value){
+  ratings[productIndex] = value;
+  localStorage.setItem('ratings', JSON.stringify(ratings));
+  updateStars(productIndex);
+}
+
+function updateStars(productIndex){
+  const stars = document.querySelectorAll(`#stars-${productIndex} .star`);
+  const rating = ratings[productIndex] || 0;
+
+  stars.forEach((star, index)=>{
+    setTimeout(()=>updateStars(i), 0);
+    if(index < rating){
+      star.classList.add('active');
+    } else {
+      star.classList.remove('active');
+    }
+  });
+}
+ const products = [
+  {
+    name:'Bendo',
+    price:50000,
+    img:'a.jpeg',
+    rating:4.5,
+    review:328
+  },
+  {
+    name:'Baju Anak-anak',
+    price:350000,
+    img:'4.jpeg',
+    rating:4.8,
+    review:215
+  },
+  {
+    name:'Tote Bag',
+    price:500000,
+    img:'5.jpeg',
+    rating:4.5,
+    review:412
+  },
+  {
+    name:'Koleksi Lainnya',
+    price:4000000,
+    img:'7.jpeg',
+    rating:5.0,
+    review:98
+  }
+];
+
+  let cart = [];
+
+  function renderProducts(){
+    const container = document.getElementById('product-list');
+    container.innerHTML='';
+
+    products.forEach((p,i)=>{
+      container.innerHTML += `
+        <div class="product">
+          <img src="${p.img}">
+          <div class="product-info">
+  <h4>${p.name}</h4>
+  <div class="price">Rp ${p.price.toLocaleString()}</div>
+
+  <div class="rating">
+
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half-alt"></i>
+
+<span>4.5 (12 Ulasan)</span>
+
+</div>
+            <div style="display:flex; gap:10px;">
+  <button class="buy-btn" onclick="addToCart(${i})">+ Keranjang</button>
+
+  <a href="Pembayaran.html?produk=${p.name}&harga=${p.price}" style="width:100%;">
+    <button class="buy-btn">Beli</button>
+  </a>
+</div>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+ function addToCart(i){
+  const item = products[i];
+
+  const existing = cart.find(c => c.name === item.name);
+
+  if(existing){
+    existing.qty++;
+  } else {
+    cart.push({...item, qty:1});
+  }
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  document.getElementById('cart-count').innerText = cart.length;
+}
+
+  function viewCart()
+  {
+    let message = 'Pesanan Anda:\n';
+    cart.forEach((item, i)=>{
+      message += `${i+1}. ${item.name} - Rp ${item.price}\n`;
+    });
+    alert(message);
+  }
+function goToCheckout(){
+
+  if(cart.length === 0){
+    alert("Keranjang masih kosong!");
+    return;
+  }
+
+  let produk = '';
+  let total = 0;
+
+  cart.forEach(item => {
+    produk += `${item.name} x${item.qty}, `;
+    total += item.price * item.qty;
+  });
+
+  // simpan ke localStorage
+  localStorage.setItem('checkoutProduk', produk);
+  localStorage.setItem('checkoutTotal', total);
+
+  // pindah halaman
+  window.location.href = "Pembayaran.html";
+}
+  function scrollToProduk(){
+    document.getElementById('produk').scrollIntoView({behavior:'smooth'});
+  }
+
+  renderProducts();
+
+  ScrollReveal().reveal('.product',{delay:200,interval:200});
+  let rating = 0;
+
+// Muncul jika selesai checkout
+window.onload = function(){
+
+    if(localStorage.getItem("showRating")=="true"){
+
+        document.getElementById("ratingPopup").style.display="flex";
+
+        localStorage.removeItem("showRating");
+
+    }
+
+}
+
+function beriRating(nilai){
+
+    rating = nilai;
+
+    const stars =
+    document.querySelectorAll("#popupStars .star");
+
+    stars.forEach((star,index)=>{
+
+        if(index < nilai){
+
+            star.classList.add("active");
+
+        }else{
+
+            star.classList.remove("active");
+
+        }
+
+    });
+
+}
+
+function kirimRating(){
+
+    const ulasan =
+    document.getElementById("ulasan").value;
+
+    alert(
+        "Terima kasih atas rating " +
+        rating +
+        " ⭐"
+    );
+
+    console.log("Rating :",rating);
+    console.log("Ulasan :",ulasan);
+
+    document.getElementById("ratingPopup").style.display="none";
+
+}
+</script>
+<div id="ratingPopup">
+
+    <div class="rating-box">
+
+        <h2>⭐ Berikan Rating</h2>
+
+        <p>Bagaimana pengalaman Anda berbelanja di Nauli Wear?</p>
+
+       <div class="stars" id="popupStars">
+
+    <span class="star" onclick="beriRating(1)">★</span>
+    <span class="star" onclick="beriRating(2)">★</span>
+    <span class="star" onclick="beriRating(3)">★</span>
+    <span class="star" onclick="beriRating(4)">★</span>
+    <span class="star" onclick="beriRating(5)">★</span>
+
+</div>
+
+        <textarea
+        id="ulasan"
+        placeholder="Tulis ulasan Anda..."
+        ></textarea>
+
+        <button onclick="kirimRating()">
+            Kirim Rating
+        </button>
+
+    </div>
+
+</div>
+</body>
+</html>

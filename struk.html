@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Struk Pembayaran</title>
+
+<style>
+.button-group{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.button-group button{
+    flex:1;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-home{
+    background:#555;
+    color:white;
+}
+
+.btn-home:hover{
+    background:#333;
+}
+
+.btn-print{
+    background:#c9a36b;
+    color:black;
+}
+
+.btn-print:hover{
+    background:black;
+    color:white;
+}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#f2f2f2;
+padding:30px;
+}
+
+.struk{
+
+width:360px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+
+}
+
+.logo{
+
+text-align:center;
+margin-bottom:15px;
+
+}
+
+.logo h2{
+
+font-size:28px;
+
+}
+
+.logo p{
+
+font-size:14px;
+color:#666;
+
+}
+
+hr{
+
+margin:15px 0;
+
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+
+}
+
+table td{
+
+padding:5px 0;
+
+}
+
+.right{
+
+text-align:right;
+
+}
+
+.total{
+
+font-size:20px;
+font-weight:bold;
+color:#c9a36b;
+
+}
+
+button{
+
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+background:#c9a36b;
+font-size:16px;
+font-weight:bold;
+border-radius:10px;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:black;
+color:white;
+
+}
+
+.footer{
+
+text-align:center;
+font-size:13px;
+margin-top:20px;
+color:#666;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="struk">
+
+<div class="logo">
+
+<h2>NAULI WEAR</h2>
+
+<p>Fashion Store Indonesia</p>
+
+</div>
+
+<hr>
+
+<p>
+<b>No Invoice :</b>
+<span id="invoice"></span>
+</p>
+
+<p>
+<b>Tanggal :</b>
+<span id="tanggal"></span>
+</p>
+
+<hr>
+
+<p><b>Nama :</b> <span id="nama"></span></p>
+
+<p><b>WhatsApp :</b> <span id="wa"></span></p>
+
+<p><b>Alamat :</b></p>
+
+<p id="alamat"></p>
+
+<hr>
+
+<h3>Detail Pesanan</h3>
+
+<table border="1" cellspacing="0" cellpadding="8">
+
+<thead>
+
+<tr>
+
+<th>Produk</th>
+
+<th>Subtotal</th>
+
+</tr>
+
+</thead>
+
+<tbody id="produk">
+
+</tbody>
+
+</table>
+
+</table>
+
+<hr>
+
+<table>
+
+<tr>
+
+<td>Subtotal</td>
+
+<td class="right" id="subtotal"></td>
+
+</tr>
+
+<tr>
+
+<td>Ongkir</td>
+
+<td class="right" id="ongkir"></td>
+
+</tr>
+
+<tr>
+
+<td><b>Total</b></td>
+
+<td class="right total" id="total"></td>
+
+</tr>
+
+</table>
+
+<hr>
+
+<p>
+<b>Pembayaran :</b>
+<span id="bayar"></span>
+</p>
+
+<hr>
+
+<div class="footer">
+
+Terima kasih telah berbelanja
+
+<br>
+
+<b>NAULI WEAR</b>
+
+</div>
+
+<div class="button-group">
+
+   <button class="btn-home" onclick="kembaliHome()">
+    🏠 Kembali ke Home
+</button>
+
+    <button class="btn-print" onclick="window.print()">
+        🖨 Cetak Struk
+    </button>
+
+</div>
+
+</div>
+
+<script>
+
+const data =
+JSON.parse(localStorage.getItem("invoice"));
+
+document.getElementById("nama").innerHTML=data.nama;
+document.getElementById("wa").innerHTML=data.wa;
+document.getElementById("alamat").innerHTML=data.alamat;
+document.getElementById("bayar").innerHTML=data.bayar;
+document.getElementById("total").innerHTML="Rp "+data.total.toLocaleString();
+
+document.getElementById("tanggal").innerHTML=
+new Date().toLocaleString();
+
+document.getElementById("invoice").innerHTML =
+data.invoice;
+
+let html="";
+
+data.cart.forEach(item=>{
+
+let subtotal=item.qty*item.harga;
+
+html+=`
+
+<tr>
+
+<td>
+
+${item.nama}
+
+<br>
+
+${item.qty} x Rp ${item.harga.toLocaleString()}
+
+</td>
+
+<td class="right">
+
+Rp ${subtotal.toLocaleString()}
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("produk").innerHTML=html;
+function kembaliHome(){
+
+    // Menandai bahwa user baru selesai checkout
+    localStorage.setItem("showRating","true");
+
+    // Kembali ke Home
+    window.location.href="Index.html.html";
+
+}
+</script>
+
+</body>
+</html>
